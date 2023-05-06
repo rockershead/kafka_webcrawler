@@ -1,0 +1,72 @@
+async finished(elasticClient,html_text,crawlId,producer,url,module){
+
+   //stores in elastisearch.rmb to store the crawlid in elastiseacrh
+
+   if(html_text!="Error")
+   {
+
+    await elasticClient.index({
+      index: 'crawlers',
+      body: {
+        "crawlId":crawlId,
+        "url":url,
+        "status":"Complete",
+        "htmlText":html_text,
+        "module":module,
+        "timestamp":new Date()
+  
+      }
+    })
+
+     //publish status to this.result_topic.publish the crawlid also.
+   var feedback={"crawlId":crawlId,"url":url,"module":module,"status":"Complete"}
+   await producer.send({
+    topic: 'crawl_result_webcrawler',
+    messages: [
+      { value: JSON.stringify(feedback) },
+    ],
+  });
+
+
+   }
+
+   else{
+
+    await elasticClient.index({
+      index: 'crawlers',
+      body: {
+        "crawlId":crawlId,
+        "url":url,
+        "status":"Error",
+        "module":module,
+        "timestamp":new Date()
+  
+      }
+    })
+
+     //publish status to this.result_topic.publish the crawlid also.
+   var feedback={"crawlId":crawlId,"url":url,"module":module,"status":"Error"}
+   await producer.send({
+    topic: 'crawl_result_webcrawler',
+    messages: [
+      { value: JSON.stringify(feedback) },
+    ],
+  });
+
+
+
+
+
+
+   }
+
+   
+
+
+  
+  
+  // Disconnect the producer once we're done
+  await producer.disconnect();
+
+
+ }

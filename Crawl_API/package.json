@@ -1,0 +1,36 @@
+{
+  "name": "pylon-service",
+  "version": "1.0.0",
+  "description": "RESTful API service powering Pylons",
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/pyloncity/pylon-service/"
+  },
+  "scripts": {
+    "start": "node ./bin/www",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pylon City",
+  "license": "ISC",
+  "dependencies": {
+    "@elastic/elasticsearch": "^8.7.0",
+    "axios": "^0.19.0",
+    "cors": "^2.8.5",
+    "dark-sky": "^1.1.4",
+    "debug": "^4.3.4",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "express-acl": "^2.0.6",
+    "express-useragent": "^1.0.12",
+    "http-errors": "^1.7.1",
+    "kafkajs": "^2.2.4",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.43",
+    "mongoose": "^7.0.4",
+    "path": "^0.12.7",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^4.6.2",
+    "uuid": "^3.3.2",
+    "uuidv4": "^6.2.13"
+  }
+}
